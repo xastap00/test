@@ -1,0 +1,21 @@
+name: Test OIDC namespace upload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload_components:
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+      - name: Upload component to the component registry
+        uses: espressif/upload-components-ci-action@v2
+        with:
+          components: "cmp_no_trusted_uploaders: ./test_namespace_cmp"
+          version: "1.0.1"
+          namespace: "xastap00"
+          registry_url: "https://unpersonable-ellsworth-tormentingly.ngrok-free.dev"
